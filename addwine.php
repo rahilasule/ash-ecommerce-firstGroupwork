@@ -1,8 +1,8 @@
 
 <?php
-/*
+	/*
 	session_start();
-	if(!isset($_SESSION['uname'] && $_SESSION['pwd']))){
+	if(!isset($_SESSION['uname'])){
 		header("location:login.php");
 	}
 	**/
@@ -13,9 +13,6 @@
 		<title>Add Wine</title>
 	</head>
 	<body>
-		<div style="text-align:right">
-			<a href="logout.php"> Log Out</a>
-		</div>
 		<h><b>ADD WINE</b></h> <br>
 		<table>
 			<tr>
@@ -56,7 +53,7 @@
 				<td>Description:</td> <td><textarea id="ed" cols="30" rows="5"required></textarea></td>
 			</tr>
 			<tr><td></td><td>
-			<input type="submit" onclick="addWine()" value="Add"></td>
+			<input type="submit" onclick="addWine()" value="ADD"></td>
 			</tr>
 		</table>
 	</body>
