@@ -16,26 +16,22 @@
 	</head>
 	<body>
 		<?php
-			if(!isset($_REQUEST['wid'])){
-				exit();
-			}		
-				include("wines.php");
+			if(isset($_REQUEST['wid'])){	
+				require_once("wines.php");
 				$obj = new wines();
 				$wid=$_REQUEST['wid'];		
-				if(!$obj->get_wine($wid)) {
-					echo "Error Editing Wine";
-					exit();
-				}else{
-					$row=$obj->fetch();
+				$obj->get_wine($wid)
+				$row=$obj->fetch();
+
+
 				}
+			}
 			?>
 	
-		<table>
-			<tr>
-			<td>Wine Name: </td><td> <input type="text" value="<?php echo $row['wine_name']?>" id="wn"></td>
-			</tr>
-			<tr>
-			<td>Wine Type: </td><td><select id="lid">
+		<form method="GET" action="editwine.php">
+			<input type="hidden" name="id" value="<?php echo $wid; ?>">
+			<div>Wine Name: <input type="text" value="<?php echo $row['wine_name']?>" id="wn"></div><br>
+			<div>Wine Type: <select id="lid">
 						<option value="0">--Select Wine Type--</option>
 						<?php
 							include_once("wines.php");
@@ -51,14 +47,9 @@
 								
 							}
 						?>
-						</td>
-			</tr>
-			
-			<tr>
-			<td>Year: </td><td> <input type="text" value="<?php echo $row['year']?>" id="yr"></td>
-			</tr>
-			<tr>
-			<td>Winery:</td><td><select id="lid">
+			</div><br>
+			<div>Year: <input type="text" value="<?php echo $row['year']?>" id="yr"></div><br>
+			<div>Winery: <select id="lid">
 						<option value="0">--Select Winery--</option>
 						<?php
 							include_once("wines.php");
@@ -74,15 +65,24 @@
 								
 							}
 						?>
-						</td>
-			</tr>
-			<tr>
-			<td>Description: </td><td><textarea id="wd" cols="30" rows="5"><?php echo $row['description']?></textarea></td>
-			</tr>
-			<tr><td></td><td>
-			<input type="submit" onclick="editEquipment()" value="Edit"></td>
-			</tr>
-		</table>
+						</div><br>
+			<div>Description: <textarea id="wd" cols="30" rows="5"><?php echo $row['description']?></textarea></div><br>
+			<input type="submit" value="UPDATE">
+		</form>
+	<?php
+		if(isset($_REQUEST['wn'])){
+			include("wines.php");
+			$obj1 = new wines();
+			$wn = $_REQUEST['wn'];
+			$wt=$_REQUEST['type_id'];
+			$yr = $_REQUEST['yr'];
+			$wid = $_REQUEST['winery_id'];
+			$des = $_REQUEST['wd'];
 			
+			$obj1->edit_wine($wn, $wt, $yr, $wid, $des);
+			
+			header("Location: viewAfterLogIn.php");
+		}
+		?>
 	</body>
 </html>

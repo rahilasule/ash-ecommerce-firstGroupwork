@@ -19,7 +19,7 @@
             }
 
             function loadEditWine(wid){
-                $("#contentSpace").load("fullview.php?wid=" + wid);
+                $("#contentSpace").load("editWine.php?wid=" + wid);
 				curId=wid;
 				exit.hidden=false;
             }
@@ -27,13 +27,13 @@
             function exitView(){
 				contentSpace.innerHTML="";
 				exit.hidden=true;
-			 }
+			}
 		</script>
 		<div style="text-align:right">
 			<a href="logout.php"> Log Out</a>
 		</div>
 		<div style="text-align:left">
-			<span id="change" onclick="loadAddWine()">Add Wine</span>
+			<button id="change" onclick="loadAddWine()">Add Wine</button>
 		</div>
 		<span style="color:red;cursor:pointer" id="exit" onclick="exitView()" hidden="true"><b>Exit</b></span>
 		<div id="contentSpace"></div>
@@ -53,7 +53,7 @@
 		
 		while($row=$obj->fetch()){
 
-			echo "<tr onclick='loadViewWine($row[wine_id])' style='cursor:pointer'><td>{$row['wine_id']}</td><td>{$row['wine_name']}</td><td>{$row['wine_type']}</td><td>{$row['year']}</td><td>{$row['winery_name']}</td><td onclick='loadEditWine($row[wine_id])' style='cursor:pointer'>Edit</td></tr>";
+			echo "<tr onclick='loadViewWine($row[wine_id])' style='cursor:pointer'><td>{$row['wine_id']}</td><td>{$row['wine_name']}</td><td>{$row['wine_type']}</td><td>{$row['year']}</td><td>{$row['winery_name']}</td><td onclick='loadEditWine($row[wine_id])' style='cursor:pointer'><u><b>Edit</b></u></td></tr>";
 		}
 		echo "</table>";
 ?>
