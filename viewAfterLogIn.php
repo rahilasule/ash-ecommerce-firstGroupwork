@@ -19,7 +19,7 @@
             }
 
             function loadEditWine(wid){
-                $("#contentSpace").load("editWine.php?wid=" + wid);
+                $("#contentSpace").load("editwine.php?wid=" + wid);
 				curId=wid;
 				exit.hidden=false;
             }
@@ -53,7 +53,7 @@
 		
 		while($row=$obj->fetch()){
 
-			echo "<tr onclick='loadViewWine($row[wine_id])' style='cursor:pointer'><td>{$row['wine_id']}</td><td>{$row['wine_name']}</td><td>{$row['wine_type']}</td><td>{$row['year']}</td><td>{$row['winery_name']}</td><td onclick='loadEditWine($row[wine_id])' style='cursor:pointer'><u><b>Edit</b></u></td></tr>";
+			echo "<tr><td>{$row['wine_id']}</td><td onclick='loadViewWine($row[wine_id])' style='cursor:pointer'>{$row['wine_name']}</td><td>{$row['wine_type']}</td><td>{$row['year']}</td><td>{$row['winery_name']}</td><td onclick='loadEditWine($row[wine_id])' style='cursor:pointer'><u><b>Edit</b></u></td></tr>";
 		}
 		echo "</table>";
 ?>

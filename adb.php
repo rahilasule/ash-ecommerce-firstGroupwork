@@ -1,7 +1,7 @@
 <?php
 
 /**
- * author: 
+ * author: Rahila SUle
  * date:
  * description: A root class for all manage classes. This class communicates with DB
  */

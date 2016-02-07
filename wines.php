@@ -70,14 +70,21 @@ class wines extends adb{
 		return $this->query($str_query);
 	}
 
+	function get_year(){
+		$str_query="SELECT DISTINCT year FROM wine ORDER BY year ASC";
+		return $this->query($str_query);
+	}
+
 	function add_wine($wn, $wt, $yr, $wid, $des){
-		$str_query="INSERT INTO wine SET wine_name='$wn', wine_type=$wt, year=$yr, winery_id=$wid, description=$des";
+		$str_query="INSERT INTO wine SET wine_name='$wn', wine_type=$wt, year=$yr, winery_id=$wid, description='$des'";
+		//echo $str_query;
 		return $this->query($str_query);
 	}	
 
 	function edit_wine($wid, $wn, $wt, $yr, $wid, $des){
-		$str_query="UPDATE wine SET wine_name='$wn', wine_type=$wt, year=$yr, winery_id=$wid, description=$des
+		$str_query="UPDATE wine SET wine_name='$wn', wine_type=$wt, year=$yr, winery_id=$wid, description='$des'
 			WHERE wine.wine_id= $wid";
+			//echo $str_query;
 		return $this->query($str_query);
 	}
 
@@ -87,6 +94,17 @@ class wines extends adb{
 			JOIN wine_type ON wine.wine_type=wine_type.wine_type_id 
 			JOIN winery ON wine.winery_id=winery.winery_id
 			WHERE wine_name LIKE '%$search_text%'
+			ORDER BY wine.wine_id";
+		return $this->query($str_query);
+	}
+
+	function multiple_search($wt, $yr){
+		$winetype=$wt;
+		$year=$yr;
+		$str_query="SELECT wine_id, wine_name, wine_type.wine_type, year, winery_name FROM wine 
+			JOIN wine_type ON wine.wine_type=wine_type.wine_type_id 
+			JOIN winery ON wine.winery_id=winery.winery_id
+			WHERE (wine.wine_type = $winetype) AND (year=$year)
 			ORDER BY wine.wine_id";
 		return $this->query($str_query);
 	}
